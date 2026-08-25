@@ -56,12 +56,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
-              src="/logo.svg" 
+              src="/logo.png" 
               alt="Bridge Media Logo" 
-              className="h-8 w-auto object-contain"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-              }} 
+              className="h-10 w-auto object-contain"
             />
             <span className="text-xl font-bold tracking-tight text-white">
               Bridge Media <span className="text-amber-400">Ethiopia</span>

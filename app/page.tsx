@@ -55,11 +55,9 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img 
-              src="/logo.png" 
-              alt="Bridge Media Logo" 
-              className="h-10 w-auto object-contain"
-            />
+            <div className="flex items-center justify-center bg-amber-500 text-slate-950 font-black rounded-lg h-10 w-10 text-xl tracking-tighter shadow-md">
+              BM
+            </div>
             <span className="text-xl font-bold tracking-tight text-white">
               Bridge Media <span className="text-amber-400">Ethiopia</span>
             </span>
@@ -90,12 +88,14 @@ export default function Home() {
               Ethiopia's Omnichannel Lead Platform
             </div>
 
+            {/* EXACT MOTTO/HEADLINE */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-white">
-              Your ads are reaching thousands. <em className="italic text-amber-300 font-normal">We make them convert.</em>
+              Your Ads Are Talking. <br />
+              <span className="text-amber-400">We Make Them Sell.</span>
             </h1>
 
-            <p className="text-slate-400 text-lg font-light leading-relaxed">
-              We turn viewers across TV, Telegram, Instagram, and social media into verified, trackable leads — with scannable QR codes, instant link overlays, and Telebirr-ready checkout.
+            <p className="text-slate-300 text-lg font-light leading-relaxed">
+              We turn viewers across TV, Telegram, Instagram, and social media into verified, trackable sales — with scannable QR codes, instant link overlays, and Telebirr-ready checkout.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
@@ -113,23 +113,23 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Stats Bar */}
+            {/* UPDATED STATS BAR: REAL MARKET NUMBERS */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
               <div>
-                <div className="text-2xl font-bold text-white">54M+</div>
-                <div className="text-xs text-slate-400">Telebirr Users</div>
+                <div className="text-2xl font-bold text-white">40M+</div>
+                <div className="text-xs text-slate-300 font-medium">TV Viewers</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-white">Omni</div>
-                <div className="text-xs text-slate-400">TV & Digital Reach</div>
+                <div className="text-2xl font-bold text-white">7M+</div>
+                <div className="text-xs text-slate-300 font-medium">Social Media Users</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">24h</div>
-                <div className="text-xs text-slate-400">Setup to Live</div>
+                <div className="text-xs text-slate-300 font-medium">Setup to Live</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">0</div>
-                <div className="text-xs text-slate-400">Upfront Risk</div>
+                <div className="text-xs text-slate-300 font-medium">Upfront Risk</div>
               </div>
             </div>
           </div>
@@ -172,21 +172,21 @@ export default function Home() {
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <div className="text-amber-400 font-bold text-2xl">01</div>
               <h3 className="text-xl font-bold text-white">We Build Your Bridge</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 A custom QR code, shortcode, and branded mobile landing page — deployed across your TV slots and social channels within 24 hours.
               </p>
             </div>
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <div className="text-amber-400 font-bold text-2xl">02</div>
               <h3 className="text-xl font-bold text-white">Viewers Scan & Act</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Whether watching TV or scrolling Telegram/Instagram, users scan or tap, land on your page, and submit details in under 30 seconds.
               </p>
             </div>
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <div className="text-amber-400 font-bold text-2xl">03</div>
               <h3 className="text-xl font-bold text-white">Leads Land Instantly</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Your sales team gets notified instantly with lead details, channel origin, and property interest directly in your dashboard.
               </p>
             </div>
@@ -206,7 +206,7 @@ export default function Home() {
             <div className="space-y-2 max-w-2xl">
               <span className="text-xs font-bold text-amber-400 tracking-wider uppercase">Flagship Vertical</span>
               <h3 className="text-2xl font-bold text-white">🏢 Real Estate Developers</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Turn broadcast ads, Telegram property tours, and Instagram reels into verified site-visit bookings and unit reservations instantly.
               </p>
             </div>
@@ -232,7 +232,7 @@ export default function Home() {
               >
                 <div className="text-2xl">{ind.icon}</div>
                 <h4 className="font-bold text-white">{ind.title}</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">{ind.desc}</p>
+                <p className="text-xs text-slate-300 leading-relaxed">{ind.desc}</p>
                 <span className="text-[10px] font-bold text-amber-400 tracking-wider uppercase block pt-2">Learn More →</span>
               </div>
             ))}
@@ -251,19 +251,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <h3 className="text-xl font-bold text-white">Direct Attribution</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Know exactly which TV slot, Telegram post, or Instagram ad generated every lead and sale.
               </p>
             </div>
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <h3 className="text-xl font-bold text-white">Local Integration</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Fully compatible with local workflow systems, phone-based lead routing, and Telebirr payments.
               </p>
             </div>
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
               <h3 className="text-xl font-bold text-white">Zero Upfront Risk</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-300 text-sm leading-relaxed">
                 Launch a pilot campaign and measure performance directly before making long-term commitments.
               </p>
             </div>
@@ -272,11 +272,11 @@ export default function Home() {
       </section>
 
       {/* ---------- FOOTER ---------- */}
-      <footer id="contact" className="py-12 px-6 border-t border-slate-800 bg-slate-950 text-xs text-slate-400">
+      <footer id="contact" className="py-12 px-6 border-t border-slate-800 bg-slate-950 text-xs text-slate-300">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
           <div className="space-y-2">
             <div className="text-white font-bold text-sm">Bridge Media Ethiopia</div>
-            <p className="max-w-xs">Ethiopia's conversion-first media company — from broadcast and digital to bought.</p>
+            <p className="max-w-xs text-slate-400">Ethiopia's conversion-first media company — from broadcast and digital to bought.</p>
           </div>
           <div className="space-y-1">
             <div className="text-white font-bold mb-1">Contact</div>
@@ -285,7 +285,7 @@ export default function Home() {
             <div>Addis Ababa, Ethiopia</div>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto border-t border-slate-900 mt-8 pt-6 text-center md:text-left">
+        <div className="max-w-6xl mx-auto border-t border-slate-900 mt-8 pt-6 text-center md:text-left text-slate-500">
           © 2026 Bridge Media Ethiopia. All rights reserved.
         </div>
       </footer>
@@ -301,7 +301,7 @@ export default function Home() {
               ✕
             </button>
             <h3 className="text-2xl font-bold text-white mb-2">Claim Your Pilot Campaign</h3>
-            <p className="text-slate-400 text-sm mb-6">Launch a zero-risk pilot campaign across your TV & social channels.</p>
+            <p className="text-slate-300 text-sm mb-6">Launch a zero-risk pilot campaign across your TV & social channels.</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>

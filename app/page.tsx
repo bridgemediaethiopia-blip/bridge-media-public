@@ -7,19 +7,59 @@ export default function Home() {
   const [howModalOpen, setHowModalOpen] = useState(false);
   const [industryModal, setIndustryModal] = useState<string | null>(null);
 
+  // Form State
+  const [company, setCompany] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Web3Forms Submission Handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "4448bb07-02d1-4d59-9a3c-d622a7d9e2bb",
+          company_name: company,
+          phone_number: phone,
+          message: "New Lead from Bridge Media Website Pilot Request",
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert("Thank you! Your demo request has been sent successfully.");
+        setCompany("");
+        setPhone("");
+        setPilotModalOpen(false);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Submission error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans">
       {/* ---------- NAVIGATION ---------- */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Custom Logo Image / SVG Placeholder */}
             <img 
               src="/logo.svg" 
               alt="Bridge Media Logo" 
               className="h-8 w-auto object-contain"
               onError={(e) => {
-                // Fallback graphic if /public/logo.svg isn't added yet
                 e.currentTarget.style.display = 'none';
               }} 
             />
@@ -203,6 +243,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- WHY US ---------- */}
+      <section id="why" className="py-20 px-6 border-t border-slate-800/80 bg-slate-900/20">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div>
+            <div className="text-xs font-semibold tracking-widest text-amber-400 uppercase mb-2">Why Bridge Media</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">Conversion-first media for Ethiopia.</h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
+              <h3 className="text-xl font-bold text-white">Direct Attribution</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Know exactly which TV slot, Telegram post, or Instagram ad generated every lead and sale.
+              </p>
+            </div>
+            <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
+              <h3 className="text-xl font-bold text-white">Local Integration</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Fully compatible with local workflow systems, phone-based lead routing, and Telebirr payments.
+              </p>
+            </div>
+            <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 space-y-3">
+              <h3 className="text-xl font-bold text-white">Zero Upfront Risk</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Launch a pilot campaign and measure performance directly before making long-term commitments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ---------- FOOTER ---------- */}
       <footer id="contact" className="py-12 px-6 border-t border-slate-800 bg-slate-950 text-xs text-slate-400">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-8">
@@ -222,7 +293,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* ---------- PILOT / DEMO MODAL ---------- */}
+      {/* ---------- PILOT / DEMO MODAL WITH WEB3FORMS ---------- */}
       {pilotModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full relative shadow-2xl">
@@ -235,17 +306,35 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-white mb-2">Claim Your Pilot Campaign</h3>
             <p className="text-slate-400 text-sm mb-6">Launch a zero-risk pilot campaign across your TV & social channels.</p>
 
-            <form onSubmit={(e) => { e.preventDefault(); alert("Request submitted! Our team will contact you shortly."); setPilotModalOpen(false); }} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">Company / Developer Name</label>
-                <input required type="text" className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400" placeholder="e.g. Zafro Real Estate" />
+                <input 
+                  required 
+                  type="text" 
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400" 
+                  placeholder="e.g. Zafro Real Estate" 
+                />
               </div>
               <div>
                 <label className="block text-xs font-medium text-slate-300 mb-1">Phone Number / WhatsApp</label>
-                <input required type="tel" className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400" placeholder="+251 9..." />
+                <input 
+                  required 
+                  type="tel" 
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-amber-400" 
+                  placeholder="+251 9..." 
+                />
               </div>
-              <button type="submit" className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold py-3 rounded-lg transition-all mt-2">
-                Submit Pilot Request
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold py-3 rounded-lg transition-all mt-2 disabled:opacity-50"
+              >
+                {isSubmitting ? "Sending..." : "Submit Pilot Request"}
               </button>
             </form>
           </div>

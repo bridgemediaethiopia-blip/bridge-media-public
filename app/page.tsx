@@ -54,13 +54,14 @@ export default function Home() {
       {/* ---------- NAVIGATION ---------- */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          
+          {/* LOGO IMAGE */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center bg-amber-500 text-slate-950 font-black rounded-lg h-10 w-10 text-xl tracking-tighter shadow-md">
-              BM
-            </div>
-            <span className="text-xl font-bold tracking-tight text-white">
-              Bridge Media <span className="text-amber-400">Ethiopia</span>
-            </span>
+            <img 
+              src="/logo.png" 
+              alt="Bridge Media Ethiopia Logo" 
+              className="h-10 w-auto object-contain"
+            />
           </div>
 
           <div className="hidden md:flex items-center gap-8 text-sm text-slate-300">
@@ -88,7 +89,7 @@ export default function Home() {
               Ethiopia's Omnichannel Lead Platform
             </div>
 
-            {/* EXACT MOTTO/HEADLINE */}
+            {/* MAIN HEADLINE */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight text-white">
               Your Ads Are Talking. <br />
               <span className="text-amber-400">We Make Them Sell.</span>
@@ -113,7 +114,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* UPDATED STATS BAR: REAL MARKET NUMBERS */}
+            {/* MARKET REACH STATS */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800/80">
               <div>
                 <div className="text-2xl font-bold text-white">40M+</div>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bridge-media-public-fuwsfyudt.vercel.app/sitemap.xml

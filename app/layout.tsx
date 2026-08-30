@@ -51,6 +51,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}git add .
-git commit -m "Update Google Search Console verification meta tag"
-git push origin main
+}

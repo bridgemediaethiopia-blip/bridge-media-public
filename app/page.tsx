@@ -1,16 +1,51 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 export default function Home() {
+  const [result, setResult] = useState("");
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setResult("Sending...");
+    const formData = new FormData(event.currentTarget);
+
+    // Integrated Web3Forms Access Key
+    formData.append("access_key", "4448bb07-02d1-4d59-9a3c-d622a7d9e2bb");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Success! Your demo request has been submitted.");
+        (event.target as HTMLFormElement).reset();
+        setTimeout(() => setIsDemoOpen(false), 2000);
+      } else {
+        setResult(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setResult("Failed to send. Please check your internet connection.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-white">
-      {/* Navigation */}
+      {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            {/* Brand Logo */}
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/20">
-              BM
-            </div>
+            {/* Logo Image */}
+            <img
+              src="/logo.png"
+              alt="Bridge Media Ethiopia Logo"
+              className="h-9 w-auto object-contain"
+            />
             <div className="flex items-center gap-2">
               <span className="font-bold text-lg tracking-tight text-white">
                 BRIDGE MEDIA
@@ -34,12 +69,12 @@ export default function Home() {
               Contact
             </a>
           </div>
-          <a
-            href="#contact"
+          <button
+            onClick={() => setIsDemoOpen(true)}
             className="px-4 py-2 text-sm font-semibold rounded-lg bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition shadow-md shadow-cyan-500/20"
           >
-            Book a Free Pilot
-          </a>
+            Book a Demo
+          </button>
         </div>
       </nav>
 
@@ -60,12 +95,12 @@ export default function Home() {
               Turn every TV commercial, Instagram post, and SMS campaign into real-time verified buyer leads on a single dashboard.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#contact"
+              <button
+                onClick={() => setIsDemoOpen(true)}
                 className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:opacity-90 transition shadow-lg shadow-cyan-500/25 text-center"
               >
                 Start Your Free Pilot — Zero Risk →
-              </a>
+              </button>
               <a
                 href="#demo"
                 className="px-6 py-3.5 rounded-xl border border-slate-800 bg-slate-900/50 hover:bg-slate-900 transition text-center text-slate-300 font-medium"
@@ -75,7 +110,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Dashboard Preview Card (Fixed Trust Framing) */}
+          {/* Hero Dashboard Preview Card */}
           <div id="demo" className="p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl relative">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 mb-6 gap-2">
               <div>
@@ -104,7 +139,7 @@ export default function Home() {
                 <p className="text-2xl font-bold text-cyan-400">384</p>
               </div>
             </div>
-            
+
             <div className="p-4 rounded-xl bg-cyan-500/5 border border-cyan-500/10 text-xs text-slate-300 flex justify-between items-center">
               <span>Primary Attribution: TV Broadcast (EBC) + Telegram</span>
               <span className="text-cyan-400 font-mono flex items-center gap-1.5">
@@ -116,7 +151,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reconciled Metrics Bar */}
+      {/* Reconciled Stats Bar */}
       <section className="py-12 border-y border-slate-800/80 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
@@ -157,7 +192,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Industries Section */}
+      {/* Target Industries Section */}
       <section id="industries" className="py-20 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
         <h2 className="text-3xl font-bold mb-12 text-white">Target Solutions</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,27 +200,35 @@ export default function Home() {
             <span className="text-[10px] uppercase text-cyan-400 font-bold tracking-widest">Flagship Partner</span>
             <h3 className="text-xl font-bold mt-2 mb-2 text-white">Real Estate</h3>
             <p className="text-xs text-slate-400 mb-6 leading-relaxed">Capture apartment buyers straight from evening TV ads into booked site visits.</p>
-            <a href="#contact" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">Inquire for Real Estate →</a>
+            <button onClick={() => setIsDemoOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
+              Inquire for Real Estate →
+            </button>
           </div>
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800">
             <h3 className="text-xl font-bold mt-6 mb-2 text-white">Automotive</h3>
             <p className="text-xs text-slate-400 mb-6 leading-relaxed">Direct vehicle inquiries to instant phone verification and showroom bookings.</p>
-            <a href="#contact" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">Inquire for Automotive →</a>
+            <button onClick={() => setIsDemoOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
+              Inquire for Automotive →
+            </button>
           </div>
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800">
             <h3 className="text-xl font-bold mt-6 mb-2 text-white">Hospitality</h3>
             <p className="text-xs text-slate-400 mb-6 leading-relaxed">Turn promotional social reels into instant room and event reservations.</p>
-            <a href="#contact" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">Inquire for Hospitality →</a>
+            <button onClick={() => setIsDemoOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
+              Inquire for Hospitality →
+            </button>
           </div>
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800">
             <h3 className="text-xl font-bold mt-6 mb-2 text-white">Healthcare</h3>
             <p className="text-xs text-slate-400 mb-6 leading-relaxed">Streamline patient consultation bookings from broadcast public notices.</p>
-            <a href="#contact" className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">Inquire for Healthcare →</a>
+            <button onClick={() => setIsDemoOpen(true)} className="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
+              Inquire for Healthcare →
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Contact & Interactive Action Section */}
+      {/* Contact Section */}
       <section id="contact" className="py-20 px-6 max-w-7xl mx-auto border-t border-slate-800/80">
         <div className="bg-slate-900 rounded-3xl p-8 md:p-12 border border-slate-800 text-center relative overflow-hidden">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white">Ready to Turn Your Ads Into Sales?</h2>
@@ -193,11 +236,11 @@ export default function Home() {
             Book your risk-free pilot campaign today. We build your unified lead capture system with zero upfront setup fees.
           </p>
 
-          {/* Working Interactive Action Buttons */}
+          {/* Interactive Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-            {/* WhatsApp Direct Link */}
+            {/* WhatsApp Link */}
             <a
-              href="https://wa.me/251979492729?text=Hello%20Bridge%20Media%2C%20I%20would%20like%20to%20learn%20more%20about%20a%20free%20pilot."
+              href="https://wa.me/251979492729?text=Hello%20Bridge%20Media%2C%20I%20would%20like%20to%20book%20a%20demo."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-lg shadow-emerald-600/20"
@@ -205,9 +248,9 @@ export default function Home() {
               Message Us on WhatsApp
             </a>
 
-            {/* Email Direct mailto: Link */}
+            {/* Email mailto Link */}
             <a
-              href="mailto:bridgemediaethiopia@gmail.com?subject=Bridge%20Media%20Pilot%20Inquiry"
+              href="mailto:bridgemediaethiopia@gmail.com?subject=Bridge%20Media%20Demo%20Inquiry"
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition border border-slate-700"
             >
               Email Us Directly
@@ -215,12 +258,73 @@ export default function Home() {
           </div>
 
           <div className="text-xs text-slate-500 flex flex-col md:flex-row items-center justify-center gap-4">
-            <span>Direct Phone: <a href="tel:+251979492729" className="text-slate-300 hover:underline">+251 979 492 729</a></span>
+            <span>
+              Direct Phone:{" "}
+              <a href="tel:+251979492729" className="text-slate-300 hover:underline">
+                +251 979 492 729
+              </a>
+            </span>
             <span className="hidden md:inline">•</span>
             <span>Addis Ababa, Ethiopia</span>
           </div>
         </div>
       </section>
+
+      {/* Web3Forms Registration Popup Modal */}
+      {isDemoOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl max-w-md w-full relative shadow-2xl">
+            <button
+              onClick={() => setIsDemoOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white text-lg font-bold"
+            >
+              ✕
+            </button>
+            <h3 className="text-xl font-bold text-white mb-2">Book a Demo</h3>
+            <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+              Enter your details to schedule a live dashboard demonstration.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Your Name"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-cyan-500"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-300 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  required
+                  placeholder="+251 9..."
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm focus:outline-none focus:border-cyan-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl bg-cyan-500 text-slate-950 font-semibold hover:bg-cyan-400 transition text-sm shadow-md shadow-cyan-500/20"
+              >
+                Submit Demo Request
+              </button>
+            </form>
+            {result && (
+              <p className="text-xs text-center text-cyan-400 mt-4 font-medium">
+                {result}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-slate-800/80 text-center text-xs text-slate-500">

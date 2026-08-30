@@ -151,7 +151,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reconciled Stats Bar */}
+      {/* Stats Bar */}
       <section className="py-12 border-y border-slate-800/80 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
@@ -248,9 +248,11 @@ export default function Home() {
               Message Us on WhatsApp
             </a>
 
-            {/* Email mailto Link */}
+            {/* Direct Web Gmail Link */}
             <a
-              href="mailto:bridgemediaethiopia@gmail.com?subject=Bridge%20Media%20Demo%20Inquiry"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=bridgemediaethiopia@gmail.com&su=Bridge%20Media%20Demo%20Inquiry"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition border border-slate-700"
             >
               Email Us Directly
@@ -258,6 +260,18 @@ export default function Home() {
           </div>
 
           <div className="text-xs text-slate-500 flex flex-col md:flex-row items-center justify-center gap-4">
+            <span>
+              Direct Email:{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=bridgemediaethiopia@gmail.com&su=Bridge%20Media%20Demo%20Inquiry"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-300 hover:underline"
+              >
+                bridgemediaethiopia@gmail.com
+              </a>
+            </span>
+            <span className="hidden md:inline">•</span>
             <span>
               Direct Phone:{" "}
               <a href="tel:+251979492729" className="text-slate-300 hover:underline">
